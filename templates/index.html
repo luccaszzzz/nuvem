@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bem-vindo ao Sistema de Cadastro</h1>
+        </div>
+        
+        <div class="content">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            {% if user.is_authenticated %}
+            <div class="welcome">
+                <h2>Olá, {{ user.first_name }}!</h2>
+                <p>Você está logado no sistema como <strong>{{ user.username }}</strong>.</p>
+                <p>Email: {{ user.email }}</p>
+                <div class="auth-links">
+                    <a href="/admin/" class="btn btn-primary">Painel Admin</a>
+                    <a href="/logout/" class="btn btn-secondary">Sair</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="welcome">
+                <h2>Sistema de Cadastro de Usuários</h2>
+                <p>Faça login ou cadastre-se para acessar o sistema.</p>
+                <div class="auth-links">
+                    <a href="/cadastro/" class="btn btn-primary">Cadastrar</a>
+                    <a href="/login/" class="btn btn-secondary">Login</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
